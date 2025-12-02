@@ -1,0 +1,5 @@
+{
+  "name": "Copy of AI 宝可梦大对决",
+  "description": "基于 Gemini API 的回合制宝可梦对战游戏，具有智能战斗解说和属性克制计算。",
+  "requestFramePermissions": []
+}

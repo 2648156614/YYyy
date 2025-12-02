@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 宝可梦大对决</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
+      body {
+        font-family: 'ZCOOL KuaiLe', system-ui, sans-serif;
+      }
+
+      /* 玩家攻击动画：蓄力后向右上冲刺 */
+      @keyframes tackle-player {
+        0% { transform: translate(0, 0) scale(1); }
+        20% { transform: translate(-10px, 10px) scale(0.95) rotate(-5deg); filter: brightness(0.8); } /* 蓄力 */
+        40% { transform: translate(60px, -60px) scale(1.2) rotate(5deg); filter: brightness(1.2); } /* 撞击点 */
+        50% { transform: translate(40px, -40px) scale(1.1); } /* 回弹 */
+        100% { transform: translate(0, 0) scale(1); }
+      }
+
+      /* 敌人攻击动画：蓄力后向左下冲刺 */
+      @keyframes tackle-enemy {
+        0% { transform: translate(0, 0) scale(1); }
+        20% { transform: translate(10px, -10px) scale(0.95) rotate(5deg); filter: brightness(0.8); } /* 蓄力 */
+        40% { transform: translate(-60px, 60px) scale(1.2) rotate(-5deg); filter: brightness(1.2); } /* 撞击点 */
+        50% { transform: translate(-40px, 40px) scale(1.1); } /* 回弹 */
+        100% { transform: translate(0, 0) scale(1); }
+      }
+
+      /* 受击动画：剧烈震动 + 变红闪烁 */
+      @keyframes damage-shake {
+        0% { transform: translate(0, 0); filter: none; }
+        10%, 90% { transform: translate3d(-2px, 2px, 0); }
+        20%, 80% { transform: translate3d(4px, -2px, 0); filter: saturate(3) brightness(0.7) sepia(1) hue-rotate(-50deg); } /* 红色闪光 */
+        30%, 50%, 70% { transform: translate3d(-8px, 4px, 0); }
+        40%, 60% { transform: translate3d(8px, -4px, 0); filter: saturate(3) brightness(0.7) sepia(1) hue-rotate(-50deg); }
+        100% { transform: translate(0, 0); filter: none; }
+      }
+
+      .animate-tackle-player {
+        animation: tackle-player 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      .animate-tackle-enemy {
+        animation: tackle-enemy 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      .animate-damage {
+        animation: damage-shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-900 text-slate-100 h-screen overflow-hidden">
+    <div id="root" class="h-full w-full"></div>
+  </body>
+</html>
